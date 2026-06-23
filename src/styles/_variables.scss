@@ -1,0 +1,44 @@
+// Fonts
+$font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+// Colors
+$primary-color: #256f68;
+$primary-hover: #1f625c;
+$primary-active: #194f4a;
+$primary-soft: #e7f3f1;
+
+$secondary-bg: #ffffff;
+$secondary-color: #263238;
+$secondary-border: #d8e0de;
+$secondary-hover: #f6f9f8;
+$secondary-active: #edf4f2;
+
+$outline-border: $primary-color;
+$outline-hover-bg: $primary-soft;
+$outline-hover-color: $primary-color;
+
+$disabled-bg: #eef1f0;
+$disabled-color: #8b9996;
+
+// Spacing
+$padding-small: 8px 16px;
+$padding-medium: 12px 24px;
+$padding-large: 16px 32px;
+
+// Sizes
+$font-size-small: 14px;
+$font-size-medium: 16px;
+$font-size-large: 18px;
+
+// Border radius
+$border-radius-small: 4px;
+$border-radius-medium: 8px;
+$border-radius-large: 12px;
+
+// Other
+$transition:
+  background-color 160ms ease,
+  color 160ms ease,
+  border-color 160ms ease,
+  box-shadow 160ms ease,
+  transform 160ms ease;
