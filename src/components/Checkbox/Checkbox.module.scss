@@ -1,0 +1,106 @@
+@use "../../styles/_variables" as *;
+
+.checkbox {
+  display: inline-grid;
+  grid-template-columns: 20px minmax(0, 1fr);
+  gap: 8px;
+  align-items: start;
+  color: $secondary-color;
+  font-family: $font-family;
+  font-size: $font-size-medium;
+  line-height: 1.35;
+  cursor: pointer;
+}
+
+.control {
+  position: relative;
+  display: inline-flex;
+  width: 20px;
+  height: 20px;
+  align-items: center;
+  justify-content: center;
+}
+
+.control input {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  cursor: inherit;
+  opacity: 0;
+}
+
+.box {
+  position: relative;
+  width: 18px;
+  height: 18px;
+  border: 1px solid $secondary-border;
+  border-radius: $border-radius-small;
+  background-color: $secondary-bg;
+  box-shadow: $shadow-small;
+  transition: $transition;
+}
+
+.control input:hover + .box {
+  border-color: $secondary-hover-border;
+  background-color: $secondary-hover;
+  box-shadow: $shadow-medium;
+}
+
+.control input:focus-visible + .box {
+  border-color: $primary-color;
+  box-shadow: $focus-ring;
+}
+
+.control input:checked + .box {
+  border-color: $primary-color;
+  background-color: $primary-color;
+  box-shadow: $shadow-primary;
+}
+
+.control input:checked + .box::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 9px;
+  border: solid $secondary-bg;
+  border-width: 0 2px 2px 0;
+  content: "";
+  transform: translate(-50%, -60%) rotate(45deg);
+}
+
+.label {
+  min-width: 0;
+}
+
+.error {
+  grid-column: 2;
+  color: $error-color;
+  font-size: $font-size-small;
+  line-height: 1.35;
+}
+
+.hasError {
+  .box {
+    border-color: $error-border;
+    box-shadow: $error-shadow;
+  }
+}
+
+.disabled {
+  color: $disabled-color;
+  cursor: not-allowed;
+
+  .box {
+    background-color: $disabled-bg;
+    border-color: $disabled-bg;
+    box-shadow: none;
+  }
+
+  .control input:checked + .box {
+    background-color: $disabled-color;
+    border-color: $disabled-color;
+    box-shadow: none;
+  }
+}

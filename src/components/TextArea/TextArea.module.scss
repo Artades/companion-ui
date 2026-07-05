@@ -1,0 +1,131 @@
+@use "../../styles/_variables" as *;
+
+.textArea {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 8px;
+  color: $secondary-color;
+  font-family: $font-family;
+}
+
+.control {
+  position: relative;
+  display: flex;
+  min-height: 96px;
+  width: 100%;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid $secondary-border;
+  border-radius: $border-radius-medium;
+  background-color: $secondary-bg;
+  box-shadow: $shadow-small;
+  transition: $transition;
+
+  textarea {
+    width: 100%;
+    height: 100%;
+    resize: vertical;
+    border: 0;
+    background-color: transparent;
+    color: $secondary-color;
+    font: inherit;
+    font-size: $font-size-medium;
+    line-height: 1.4;
+    outline: 0;
+    padding: 12px 14px;
+
+    &::placeholder {
+      color: $disabled-color;
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+    }
+  }
+}
+
+.label {
+  position: absolute;
+  top: 0;
+  left: 12px;
+  max-width: calc(100% - 24px);
+  padding: 0 4px;
+  background-color: $secondary-bg;
+  color: $disabled-color;
+  font-size: $font-size-small;
+  font-weight: 600;
+  line-height: 1;
+  overflow: hidden;
+  pointer-events: none;
+  text-overflow: ellipsis;
+  transform: translateY(-50%);
+  white-space: nowrap;
+  transition: $transition;
+}
+
+.textArea:not(.disabled):not(.readOnly):not(.hasError) .control:hover {
+  border-color: $secondary-hover-border;
+  background-color: $secondary-hover;
+  box-shadow: $shadow-medium;
+}
+
+.control:focus-within {
+  border-color: $primary-color;
+  box-shadow:
+    $focus-ring,
+    $shadow-small;
+}
+
+.textArea:focus-within {
+  .label {
+    color: $primary-color;
+  }
+}
+
+.error {
+  color: $error-color;
+  font-size: $font-size-small;
+  line-height: 1.35;
+}
+
+.hasError {
+  .control {
+    border-color: $error-border;
+    box-shadow: $error-shadow;
+  }
+
+  .label {
+    color: $error-color;
+  }
+}
+
+.readOnly {
+  .control {
+    background-color: $secondary-hover;
+  }
+
+  textarea {
+    cursor: default;
+  }
+}
+
+.disabled {
+  color: $disabled-color;
+
+  .control {
+    background-color: $disabled-bg;
+    border-color: $disabled-bg;
+    box-shadow: none;
+    cursor: not-allowed;
+  }
+
+  textarea {
+    color: $disabled-color;
+  }
+
+  .label {
+    background-color: $disabled-bg;
+    color: $disabled-color;
+  }
+}

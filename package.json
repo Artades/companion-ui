@@ -3,9 +3,30 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "main": "./lib/index.cjs",
+  "module": "./lib/index.js",
+  "types": "./lib/index.d.ts",
+  "style": "./lib/index.css",
+  "sideEffects": [
+    "**/*.css",
+    "**/*.scss"
+  ],
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "import": "./lib/index.js",
+      "require": "./lib/index.cjs"
+    },
+    "./index.css": "./lib/index.css",
+    "./globals.css": "./lib/globals.css",
+    "./styles/variables.scss": "./src/styles/_variables.scss",
+    "./styles/globals.scss": "./src/styles/globals.scss"
+  },
   "scripts": {
     "dev": "vite",
-    "build": "rollup -c",
+    "build": "npm run build:lib && npm run build:globals",
+    "build:lib": "rollup -c",
+    "build:globals": "sass src/styles/globals.scss lib/globals.css --style=compressed --no-source-map",
     "lint": "eslint .",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
@@ -41,7 +62,7 @@
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.1",
     "babel-jest": "^29.7.0",
-    "eslint": "^10.3.0",
+   "eslint": "^9.39.4",
     "eslint-plugin-react": "^7.37.2",
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.2",

@@ -1,0 +1,10 @@
+.app {
+  box-sizing: border-box;
+  min-height: 100svh;
+  padding: 48px 24px;
+}
+
+.app__demo {
+  width: min(420px, 100%);
+  margin: 0 auto;
+}

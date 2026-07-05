@@ -1,0 +1,136 @@
+@use "../../styles/_variables" as *;
+
+.select {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 8px;
+  color: $secondary-color;
+  font-family: $font-family;
+}
+
+.control {
+  position: relative;
+  display: flex;
+  min-height: 44px;
+  align-items: center;
+  border: 1px solid $secondary-border;
+  border-radius: $border-radius-medium;
+  background-color: $secondary-bg;
+  box-shadow: $shadow-small;
+  transition: $transition;
+
+  select {
+    width: 100%;
+    min-width: 0;
+    appearance: none;
+    border: 0;
+    background: transparent;
+    color: $secondary-color;
+    cursor: pointer;
+    font: inherit;
+    font-size: $font-size-medium;
+    line-height: 1.2;
+    outline: 0;
+    padding: 12px 40px 12px 14px;
+
+    &:disabled {
+      cursor: not-allowed;
+    }
+  }
+}
+
+.label {
+  position: absolute;
+  top: 0;
+  left: 12px;
+  max-width: calc(100% - 24px);
+  padding: 0 4px;
+  background-color: $secondary-bg;
+  color: $disabled-color;
+  font-size: $font-size-small;
+  font-weight: 600;
+  line-height: 1;
+  overflow: hidden;
+  pointer-events: none;
+  text-overflow: ellipsis;
+  transform: translateY(-50%);
+  transition: $transition;
+  white-space: nowrap;
+}
+
+.chevron {
+  position: absolute;
+  right: 14px;
+  width: 8px;
+  height: 8px;
+  border: solid $disabled-color;
+  border-width: 0 2px 2px 0;
+  pointer-events: none;
+  transform: translateY(-2px) rotate(45deg);
+}
+
+.select:not(.disabled):not(.hasError) .control:hover {
+  border-color: $secondary-hover-border;
+  background-color: $secondary-hover;
+  box-shadow: $shadow-medium;
+}
+
+.control:focus-within {
+  border-color: $primary-color;
+  box-shadow:
+    $focus-ring,
+    $shadow-small;
+}
+
+.select:focus-within {
+  .label,
+  .chevron {
+    color: $primary-color;
+  }
+
+  .chevron {
+    border-color: $primary-color;
+  }
+}
+
+.error {
+  color: $error-color;
+  font-size: $font-size-small;
+  line-height: 1.35;
+}
+
+.hasError {
+  .control {
+    border-color: $error-border;
+    box-shadow: $error-shadow;
+  }
+
+  .label {
+    color: $error-color;
+  }
+
+  .chevron {
+    border-color: $error-color;
+  }
+}
+
+.disabled {
+  color: $disabled-color;
+
+  .control {
+    background-color: $disabled-bg;
+    border-color: $disabled-bg;
+    box-shadow: none;
+    cursor: not-allowed;
+  }
+
+  select {
+    color: $disabled-color;
+  }
+
+  .label {
+    background-color: $disabled-bg;
+    color: $disabled-color;
+  }
+}

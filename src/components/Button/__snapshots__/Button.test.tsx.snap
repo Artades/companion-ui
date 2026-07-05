@@ -2,7 +2,7 @@
 
 exports[`Button Component matches snapshot 1`] = `
 <button
-  class="button"
+  class="button button--primary button--medium"
 >
   Save
 </button>

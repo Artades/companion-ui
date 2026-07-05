@@ -1,4 +1,4 @@
-@use "../styles/variables" as *;
+@use "../../styles/variables" as *;
 
 .button {
   display: inline-flex;
@@ -18,7 +18,7 @@
   user-select: none;
 
   &:focus-visible {
-    outline: 3px solid rgba(37, 111, 104, 0.22);
+    outline: $focus-outline;
     outline-offset: 3px;
   }
 
@@ -37,18 +37,18 @@
 .button--primary {
   background-color: $primary-color;
   color: white;
-  box-shadow: 0 2px 6px rgba(37, 111, 104, 0.22);
+  box-shadow: $shadow-primary;
 
 
   &:hover:not(:disabled) {
     background-color: $primary-hover;
-    box-shadow: 0 4px 10px rgba(37, 111, 104, 0.24);
+    box-shadow: $shadow-primary-hover;
     transform: translateY(-1px);
   }
 
   &:active:not(:disabled) {
     background-color: $primary-active;
-    box-shadow: 0 1px 4px rgba(37, 111, 104, 0.18);
+    box-shadow: $shadow-primary-active;
     transform: translateY(0);
   }
 }
@@ -57,18 +57,18 @@
   background-color: $secondary-bg;
   color: $secondary-color;
   border: 1px solid $secondary-border;
-  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06);
+  box-shadow: $shadow-secondary;
 
   &:hover:not(:disabled) {
     background-color: $secondary-hover;
-    border-color: #bfccc9;
-    box-shadow: 0 3px 8px rgba(15, 23, 42, 0.07);
+    border-color: $secondary-hover-border;
+    box-shadow: $shadow-medium;
     transform: translateY(-1px);
   }
 
   &:active:not(:disabled) {
     background-color: $secondary-active;
-    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
+    box-shadow: $shadow-secondary-active;
     transform: translateY(0);
   }
 }
@@ -81,13 +81,13 @@
   &:hover:not(:disabled) {
     background-color: $outline-hover-bg;
     color: $outline-hover-color;
-    box-shadow: inset 0 0 0 1px rgba(37, 111, 104, 0.12);
+    box-shadow: $shadow-outline-hover;
     transform: translateY(-1px);
   }
 
   &:active:not(:disabled) {
-    background-color: rgba(37, 111, 104, 0.12);
-    box-shadow: inset 0 0 0 1px rgba(37, 111, 104, 0.18);
+    background-color: $outline-active-bg;
+    box-shadow: $shadow-outline-active;
     transform: translateY(0);
   }
 }

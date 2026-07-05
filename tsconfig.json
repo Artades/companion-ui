@@ -21,5 +21,13 @@
     "types": ["jest", "@testing-library/jest-dom", "node"]
   },
   "include": ["src/**/*"],
-  "exclude": ["lib", "node_modules", "**/*.stories.tsx"]
+  "exclude": [
+    "lib",
+    "node_modules",
+    "src/_internal/**/*",
+    "src/playground/**/*",
+    "**/*.stories.tsx",
+    "**/*.test.tsx",
+    "**/__snapshots__/**"
+  ]
 }

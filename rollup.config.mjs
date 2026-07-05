@@ -34,6 +34,12 @@ const plugins = [
     outDir: "lib",
     declarationDir: "lib",
     declaration: true,
+    exclude: [
+      "src/playground/**",
+      "**/*.stories.tsx",
+      "**/*.test.tsx",
+      "**/__snapshots__/**",
+    ],
     rootDir: "src",
   }),
 ];

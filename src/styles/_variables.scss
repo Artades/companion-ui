@@ -10,15 +10,34 @@ $primary-soft: #e7f3f1;
 $secondary-bg: #ffffff;
 $secondary-color: #263238;
 $secondary-border: #d8e0de;
+$secondary-hover-border: #bfccc9;
 $secondary-hover: #f6f9f8;
 $secondary-active: #edf4f2;
 
 $outline-border: $primary-color;
 $outline-hover-bg: $primary-soft;
 $outline-hover-color: $primary-color;
+$outline-active-bg: rgba(37, 111, 104, 0.12);
 
 $disabled-bg: #eef1f0;
 $disabled-color: #8b9996;
+
+$error-color: #b42318;
+$error-border: #d92d20;
+$error-shadow: 0 0 0 3px rgba(217, 45, 32, 0.12);
+
+$focus-ring: 0 0 0 3px rgba(37, 111, 104, 0.16);
+$focus-outline: 3px solid rgba(37, 111, 104, 0.22);
+
+$shadow-small: 0 1px 2px rgba(15, 23, 42, 0.04);
+$shadow-medium: 0 3px 8px rgba(15, 23, 42, 0.07);
+$shadow-primary: 0 2px 6px rgba(37, 111, 104, 0.22);
+$shadow-primary-hover: 0 4px 10px rgba(37, 111, 104, 0.24);
+$shadow-primary-active: 0 1px 4px rgba(37, 111, 104, 0.18);
+$shadow-secondary: 0 1px 2px rgba(15, 23, 42, 0.06);
+$shadow-secondary-active: 0 1px 3px rgba(15, 23, 42, 0.08);
+$shadow-outline-hover: inset 0 0 0 1px rgba(37, 111, 104, 0.12);
+$shadow-outline-active: inset 0 0 0 1px rgba(37, 111, 104, 0.18);
 
 // Spacing
 $padding-small: 8px 16px;
