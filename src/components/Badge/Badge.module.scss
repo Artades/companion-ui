@@ -1,0 +1,150 @@
+@use "../../styles/_variables" as *;
+
+.badge {
+  display: inline-flex;
+  max-width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-family: $font-family;
+  font-weight: 600;
+  line-height: 1.2;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.content {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background-color: currentColor;
+}
+
+.size-small {
+  min-height: 22px;
+  padding: 2px 8px;
+  font-size: 12px;
+}
+
+.size-medium {
+  min-height: 26px;
+  padding: 3px 10px;
+  font-size: $font-size-small;
+}
+
+.hasDot.size-small {
+  padding-left: 7px;
+}
+
+.hasDot.size-medium {
+  padding-left: 9px;
+}
+
+.tone-neutral {
+  &.variant-soft {
+    border-color: transparent;
+    background-color: $disabled-bg;
+    color: $secondary-color;
+  }
+
+  &.variant-outline {
+    border-color: $secondary-border;
+    background-color: transparent;
+    color: $secondary-color;
+  }
+
+  &.variant-filled {
+    border-color: $secondary-color;
+    background-color: $secondary-color;
+    color: $light-color;
+  }
+}
+
+.tone-primary {
+  &.variant-soft {
+    border-color: transparent;
+    background-color: $primary-soft;
+    color: $primary-color;
+  }
+
+  &.variant-outline {
+    border-color: $secondary-hover-border;
+    background-color: transparent;
+    color: $primary-color;
+  }
+
+  &.variant-filled {
+    border-color: $primary-color;
+    background-color: $primary-color;
+    color: $light-color;
+  }
+}
+
+.tone-success {
+  &.variant-soft {
+    border-color: transparent;
+    background-color: $success-soft;
+    color: $success-color;
+  }
+
+  &.variant-outline {
+    border-color: $success-border;
+    background-color: transparent;
+    color: $success-color;
+  }
+
+  &.variant-filled {
+    border-color: $success-color;
+    background-color: $success-color;
+    color: $light-color;
+  }
+}
+
+.tone-warning {
+  &.variant-soft {
+    border-color: transparent;
+    background-color: $warning-soft;
+    color: $warning-color;
+  }
+
+  &.variant-outline {
+    border-color: $warning-border;
+    background-color: transparent;
+    color: $warning-color;
+  }
+
+  &.variant-filled {
+    border-color: $warning-color;
+    background-color: $warning-color;
+    color: $light-color;
+  }
+}
+
+.tone-danger {
+  &.variant-soft {
+    border-color: transparent;
+    background-color: $error-soft;
+    color: $error-color;
+  }
+
+  &.variant-outline {
+    border-color: $error-soft-border;
+    background-color: transparent;
+    color: $error-color;
+  }
+
+  &.variant-filled {
+    border-color: $error-color;
+    background-color: $error-color;
+    color: $light-color;
+  }
+}

@@ -14,6 +14,8 @@ $secondary-hover-border: #bfccc9;
 $secondary-hover: #f6f9f8;
 $secondary-active: #edf4f2;
 
+$light-color: #ffffff;
+
 $outline-border: $primary-color;
 $outline-hover-bg: $primary-soft;
 $outline-hover-color: $primary-color;
@@ -23,8 +25,18 @@ $disabled-bg: #eef1f0;
 $disabled-color: #8b9996;
 
 $error-color: #b42318;
+$error-soft: #feeceb;
 $error-border: #d92d20;
+$error-soft-border: #f4b4ae;
 $error-shadow: 0 0 0 3px rgba(217, 45, 32, 0.12);
+
+$success-color: #1f7a4d;
+$success-soft: #e7f6ee;
+$success-border: #b9dfc9;
+
+$warning-color: #9a5b13;
+$warning-soft: #fff3da;
+$warning-border: #f1cf8a;
 
 $focus-ring: 0 0 0 3px rgba(37, 111, 104, 0.16);
 $focus-outline: 3px solid rgba(37, 111, 104, 0.22);

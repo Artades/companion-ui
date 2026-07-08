@@ -3,7 +3,7 @@ import {
   FC,
   SelectHTMLAttributes,
   useId,
-} from "react";
+ } from "react";
 import styles from "./Select.module.scss";
 
 type SelectProps = DetailedHTMLProps<
