@@ -1,0 +1,114 @@
+@use "../../styles/_variables" as *;
+
+.tooltip {
+  position: relative;
+  display: inline-flex;
+  max-width: 100%;
+  align-items: center;
+  justify-content: center;
+  font-family: $font-family;
+  vertical-align: middle;
+
+  &Content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &Text {
+    position: absolute;
+    z-index: 10;
+    width: max-content;
+    max-width: min(280px, calc(100vw - 24px));
+    padding: 6px 10px;
+    border: 1px solid $secondary-border;
+    border-radius: $border-radius-small;
+    background-color: $secondary-color;
+    box-shadow: $shadow-medium;
+    color: $light-color;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.35;
+    opacity: 0;
+    overflow-wrap: anywhere;
+    pointer-events: none;
+    text-align: left;
+    transform: scale(0.96);
+    transition:
+      opacity 120ms ease,
+      transform 120ms ease,
+      visibility 120ms ease;
+    visibility: hidden;
+    white-space: normal;
+
+    &::after {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background-color: $secondary-color;
+      content: "";
+      transform: rotate(45deg);
+    }
+  }
+
+  &:hover &Text,
+  &:focus-within &Text {
+    opacity: 1;
+    transform: scale(1);
+    visibility: visible;
+  }
+}
+
+.tooltipContent[content-position="top"] + .tooltipText {
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform-origin: bottom center;
+  translate: -50% 0;
+
+  &::after {
+    bottom: -4px;
+    left: calc(50% - 4px);
+  }
+}
+
+.tooltipContent[content-position="bottom"] + .tooltipText {
+  top: calc(100% + 8px);
+  left: 50%;
+  transform-origin: top center;
+  translate: -50% 0;
+
+  &::after {
+    top: -4px;
+    left: calc(50% - 4px);
+  }
+}
+
+.tooltipContent[content-position="left"] + .tooltipText {
+  top: 50%;
+  right: calc(100% + 8px);
+  transform-origin: center right;
+  translate: 0 -50%;
+
+  &::after {
+    top: calc(50% - 4px);
+    right: -4px;
+  }
+}
+
+.tooltipContent[content-position="right"] + .tooltipText {
+  top: 50%;
+  left: calc(100% + 8px);
+  transform-origin: center left;
+  translate: 0 -50%;
+
+  &::after {
+    top: calc(50% - 4px);
+    left: -4px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tooltipText {
+    transition: none;
+  }
+}
