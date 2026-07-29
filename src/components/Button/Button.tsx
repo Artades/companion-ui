@@ -1,20 +1,19 @@
-import { ButtonHTMLAttributes, DetailedHTMLProps, FC, ReactNode } from "react";
+import { forwardRef } from "react";
+import type { ButtonHTMLAttributes, ReactNode } from "react";
+import classNames from "../../helpers/classNames";
 import "./Button.scss";
 
 type ButtonVariant = "primary" | "secondary" | "outline";
 type ButtonSize = "small" | "medium" | "large";
 
-interface ButtonProps extends DetailedHTMLProps<
-  ButtonHTMLAttributes<HTMLButtonElement>,
-  HTMLButtonElement
-> {
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
   size?: ButtonSize;
   icon?: ReactNode;
   iconPosition?: "left" | "right";
 }
 
-const Button: FC<ButtonProps> = ({
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
   variant = "primary",
   size = "medium",
   icon,
@@ -23,19 +22,17 @@ const Button: FC<ButtonProps> = ({
   className = "",
   disabled,
   ...props
-}) => {
-  const classes = [
+}, ref) => {
+  const classes = classNames(
     "button",
     `button--${variant}`,
     `button--${size}`,
     disabled && "button--disabled",
     className,
-  ]
-    .filter(Boolean)
-    .join(" ");
+  );
 
   return (
-    <button {...props} className={classes} disabled={disabled}>
+    <button {...props} ref={ref} className={classes} disabled={disabled}>
       {icon && iconPosition === "left" && (
         <span className="button__icon button__icon--left">{icon}</span>
       )}
@@ -45,7 +42,9 @@ const Button: FC<ButtonProps> = ({
       )}
     </button>
   );
-};
+});
+
+Button.displayName = "Button";
 
 export type { ButtonProps };
 export default Button;

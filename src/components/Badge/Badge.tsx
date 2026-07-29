@@ -1,4 +1,6 @@
-import { ElementType, FC, HTMLAttributes, ReactNode } from "react";
+import { forwardRef } from "react";
+import type { ElementType, HTMLAttributes, ReactNode } from "react";
+import classNames from "../../helpers/classNames";
 import styles from "./Badge.module.scss";
 
 type BadgeTone = "neutral" | "primary" | "success" | "warning" | "danger";
@@ -14,7 +16,7 @@ interface BadgeProps extends HTMLAttributes<HTMLElement> {
   variant?: BadgeVariant;
 }
 
-const Badge: FC<BadgeProps> = ({
+const Badge = forwardRef<HTMLElement, BadgeProps>(({
   as: Component = "span",
   children,
   className = "",
@@ -24,24 +26,24 @@ const Badge: FC<BadgeProps> = ({
   variant = "soft",
   ...props
 }) => {
-  const classes = [
+  const classes = classNames(
     styles.badge,
     styles[`size-${size}`],
     styles[`tone-${tone}`],
     styles[`variant-${variant}`],
     dot && styles.hasDot,
     className,
-  ]
-    .filter(Boolean)
-    .join(" ");
+  );
 
   return (
-    <Component {...props} className={classes}>
+    <Component {...props} ref={ref} className={classes}>
       {dot && <span className={styles.dot} aria-hidden="true" />}
       <span className={styles.content}>{children}</span>
     </Component>
   );
-};
+});
+
+Badge.displayName = "Badge";
 
 export type { BadgeProps, BadgeSize, BadgeTone, BadgeVariant };
 export default Badge;

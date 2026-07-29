@@ -1,0 +1,55 @@
+@use "../../styles/_variables" as *;
+
+.avatar {
+  position: relative;
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 1px solid $secondary-border;
+  border-radius: 50%;
+  background-color: $primary-soft;
+  box-shadow: $shadow-small;
+  color: $primary-color;
+  font-family: $font-family;
+  line-height: 1;
+  vertical-align: middle;
+  transition: $transition;
+  user-select: none;
+
+  &:focus-visible {
+    border-color: $primary-color;
+    box-shadow: $focus-ring;
+    outline: 0;
+  }
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.size-small {
+  width: 32px;
+  height: 32px;
+}
+
+.size-medium {
+  width: 48px;
+  height: 48px;
+}
+
+.size-large {
+  width: 64px;
+  height: 64px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .avatar {
+    transition: none;
+  }
+}

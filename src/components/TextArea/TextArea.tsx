@@ -1,20 +1,15 @@
-import {
-  DetailedHTMLProps,
-  FC,
-  TextareaHTMLAttributes,
-  useId,
-} from "react";
+import { forwardRef } from "react";
+import type { TextareaHTMLAttributes } from "react";
+import classNames from "../../helpers/classNames";
+import useFieldControl from "../../helpers/useFieldControl";
 import styles from "./TextArea.module.scss";
 
-type TextAreaProps = DetailedHTMLProps<
-  TextareaHTMLAttributes<HTMLTextAreaElement>,
-  HTMLTextAreaElement
-> & {
+interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   label?: string;
   error?: string;
-};
+}
 
-const TextArea: FC<TextAreaProps> = ({
+const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(({
   "aria-describedby": ariaDescribedBy,
   className = "",
   disabled,
@@ -23,23 +18,21 @@ const TextArea: FC<TextAreaProps> = ({
   label,
   readOnly,
   ...props
-}) => {
-  const generatedId = useId();
-  const textAreaId = id ?? generatedId;
-  const errorId = error ? `${textAreaId}-error` : undefined;
-  const describedBy =
-    [ariaDescribedBy, errorId].filter(Boolean).join(" ") || undefined;
+}, ref) => {
+  const { controlId, describedBy, errorId } = useFieldControl({
+    ariaDescribedBy,
+    error,
+    id,
+  });
 
-  const classes = [
+  const classes = classNames(
     styles.textArea,
     error && styles.hasError,
     label && styles.hasLabel,
     disabled && styles.disabled,
     readOnly && styles.readOnly,
     className,
-  ]
-    .filter(Boolean)
-    .join(" ");
+  );
 
   return (
     <label className={classes}>
@@ -48,10 +41,11 @@ const TextArea: FC<TextAreaProps> = ({
 
         <textarea
           {...props}
+          ref={ref}
           aria-describedby={describedBy}
           aria-invalid={error ? "true" : undefined}
           disabled={disabled}
-          id={textAreaId}
+          id={controlId}
           readOnly={readOnly}
         />
       </span>
@@ -62,7 +56,9 @@ const TextArea: FC<TextAreaProps> = ({
       )}
     </label>
   );
-};
+});
+
+TextArea.displayName = "TextArea";
 
 export type { TextAreaProps };
 export default TextArea;

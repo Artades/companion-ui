@@ -1,5 +1,5 @@
-import { DetailedHTMLProps, FC, InputHTMLAttributes, ReactNode } from "react";
-type NativeInputProps = Omit<DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, "children">;
+import type { InputHTMLAttributes, ReactNode } from "react";
+type NativeInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, "children">;
 interface BaseInputProps extends NativeInputProps {
     label?: string;
     error?: string;
@@ -13,6 +13,6 @@ interface InputWithoutIconProps extends BaseInputProps {
     iconPosition?: never;
 }
 type InputProps = InputWithIconProps | InputWithoutIconProps;
-declare const Input: FC<InputProps>;
+declare const Input: import("react").ForwardRefExoticComponent<InputProps & import("react").RefAttributes<HTMLInputElement>>;
 export type { InputProps };
 export default Input;

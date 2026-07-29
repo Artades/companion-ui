@@ -1,11 +1,15 @@
-import { DetailedHTMLProps, FC, InputHTMLAttributes, useId } from "react";
+import { forwardRef } from "react";
+import type { InputHTMLAttributes } from "react";
+import classNames from "../../helpers/classNames";
+import useFieldControl from "../../helpers/useFieldControl";
 import styles from "./Switch.module.scss";
+
 type SwitchProps = Omit<
-  DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>,
+  InputHTMLAttributes<HTMLInputElement>,
   "type"
 > & { label?: string; error?: string };
 
-export const Switch: FC<SwitchProps> = ({
+const Switch = forwardRef<HTMLInputElement, SwitchProps>(({
   "aria-describedby": ariaDescribedBy,
   className = "",
   disabled,
@@ -13,21 +17,19 @@ export const Switch: FC<SwitchProps> = ({
   error,
   label,
   ...props
-}) => {
-  const generatedId = useId();
-  const switchId = id ?? generatedId;
-  const errorId = error ? `${switchId}-error` : undefined;
-  const describedBy =
-    [ariaDescribedBy, errorId].filter(Boolean).join(" ") || undefined;
+}, ref) => {
+  const { controlId, describedBy, errorId } = useFieldControl({
+    ariaDescribedBy,
+    error,
+    id,
+  });
 
-  const classes = [
+  const classes = classNames(
     styles.switch,
     error && styles.hasError,
     disabled && styles.disabled,
     className,
-  ]
-    .filter(Boolean)
-    .join(" ");
+  );
 
   return (
     <label className={classes}>
@@ -36,10 +38,11 @@ export const Switch: FC<SwitchProps> = ({
       <span className={styles.control}>
         <input
           {...props}
+          ref={ref}
           aria-describedby={describedBy}
           aria-invalid={error ? "true" : undefined}
           disabled={disabled}
-          id={switchId}
+          id={controlId}
           role="switch"
           type="checkbox"
         />
@@ -55,7 +58,9 @@ export const Switch: FC<SwitchProps> = ({
       )}
     </label>
   );
-};
+});
+
+Switch.displayName = "Switch";
 
 export type { SwitchProps };
 export default Switch;

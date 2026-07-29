@@ -1,14 +1,11 @@
-import {
-  DetailedHTMLProps,
-  FC,
-  InputHTMLAttributes,
-  ReactNode,
-  useId,
-} from "react";
+import { forwardRef } from "react";
+import type { InputHTMLAttributes, ReactNode } from "react";
+import classNames from "../../helpers/classNames";
+import useFieldControl from "../../helpers/useFieldControl";
 import styles from "./Radio.module.scss";
 
 type NativeRadioProps = Omit<
-  DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>,
+  InputHTMLAttributes<HTMLInputElement>,
   "type"
 >;
 
@@ -17,7 +14,7 @@ interface RadioProps extends NativeRadioProps {
   error?: string;
 }
 
-const Radio: FC<RadioProps> = ({
+const Radio = forwardRef<HTMLInputElement, RadioProps>(({
   "aria-describedby": ariaDescribedBy,
   className = "",
   disabled,
@@ -25,30 +22,30 @@ const Radio: FC<RadioProps> = ({
   id,
   label,
   ...props
-}) => {
-  const generatedId = useId();
-  const radioId = id ?? generatedId;
-  const errorId = error ? `${radioId}-error` : undefined;
-  const describedBy = [ariaDescribedBy, errorId].filter(Boolean).join(" ") || undefined;
+}, ref) => {
+  const { controlId, describedBy, errorId } = useFieldControl({
+    ariaDescribedBy,
+    error,
+    id,
+  });
 
-  const classes = [
+  const classes = classNames(
     styles.radio,
     error && styles.hasError,
     disabled && styles.disabled,
     className,
-  ]
-    .filter(Boolean)
-    .join(" ");
+  );
 
   return (
     <label className={classes}>
       <span className={styles.control}>
         <input
           {...props}
+          ref={ref}
           aria-describedby={describedBy}
           aria-invalid={error ? "true" : undefined}
           disabled={disabled}
-          id={radioId}
+          id={controlId}
           type="radio"
         />
         <span className={styles.mark} aria-hidden="true" />
@@ -63,7 +60,9 @@ const Radio: FC<RadioProps> = ({
       )}
     </label>
   );
-};
+});
+
+Radio.displayName = "Radio";
 
 export type { RadioProps };
 export default Radio;

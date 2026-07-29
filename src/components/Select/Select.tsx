@@ -1,20 +1,15 @@
-import {
-  DetailedHTMLProps,
-  FC,
-  SelectHTMLAttributes,
-  useId,
- } from "react";
+import { forwardRef } from "react";
+import type { SelectHTMLAttributes } from "react";
+import classNames from "../../helpers/classNames";
+import useFieldControl from "../../helpers/useFieldControl";
 import styles from "./Select.module.scss";
 
-type SelectProps = DetailedHTMLProps<
-  SelectHTMLAttributes<HTMLSelectElement>,
-  HTMLSelectElement
-> & {
+interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
   label?: string;
   error?: string;
-};
+}
 
-const Select: FC<SelectProps> = ({
+const Select = forwardRef<HTMLSelectElement, SelectProps>(({
   "aria-describedby": ariaDescribedBy,
   children,
   className = "",
@@ -23,21 +18,20 @@ const Select: FC<SelectProps> = ({
   id,
   label,
   ...props
-}) => {
-  const generatedId = useId();
-  const selectId = id ?? generatedId;
-  const errorId = error ? `${selectId}-error` : undefined;
-  const describedBy = [ariaDescribedBy, errorId].filter(Boolean).join(" ") || undefined;
+}, ref) => {
+  const { controlId, describedBy, errorId } = useFieldControl({
+    ariaDescribedBy,
+    error,
+    id,
+  });
 
-  const classes = [
+  const classes = classNames(
     styles.select,
     error && styles.hasError,
     label && styles.hasLabel,
     disabled && styles.disabled,
     className,
-  ]
-    .filter(Boolean)
-    .join(" ");
+  );
 
   return (
     <label className={classes}>
@@ -46,10 +40,11 @@ const Select: FC<SelectProps> = ({
 
         <select
           {...props}
+          ref={ref}
           aria-describedby={describedBy}
           aria-invalid={error ? "true" : undefined}
           disabled={disabled}
-          id={selectId}
+          id={controlId}
         >
           {children}
         </select>
@@ -64,7 +59,9 @@ const Select: FC<SelectProps> = ({
       )}
     </label>
   );
-};
+});
+
+Select.displayName = "Select";
 
 export type { SelectProps };
 export default Select;

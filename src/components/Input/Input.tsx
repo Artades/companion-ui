@@ -1,14 +1,11 @@
-import {
-  DetailedHTMLProps,
-  FC,
-  InputHTMLAttributes,
-  ReactNode,
-  useId,
-} from "react";
+import { forwardRef } from "react";
+import type { InputHTMLAttributes, ReactNode } from "react";
+import classNames from "../../helpers/classNames";
+import useFieldControl from "../../helpers/useFieldControl";
 import styles from "./Input.module.scss";
 
 type NativeInputProps = Omit<
-  DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>,
+  InputHTMLAttributes<HTMLInputElement>,
   "children"
 >;
 
@@ -29,7 +26,7 @@ interface InputWithoutIconProps extends BaseInputProps {
 
 type InputProps = InputWithIconProps | InputWithoutIconProps;
 
-const Input: FC<InputProps> = ({
+const Input = forwardRef<HTMLInputElement, InputProps>(({
   "aria-describedby": ariaDescribedBy,
   className = "",
   disabled,
@@ -40,13 +37,14 @@ const Input: FC<InputProps> = ({
   iconPosition,
   readOnly,
   ...props
-}) => {
-  const generatedId = useId();
-  const inputId = id ?? generatedId;
-  const errorId = error ? `${inputId}-error` : undefined;
-  const describedBy = [ariaDescribedBy, errorId].filter(Boolean).join(" ") || undefined;
+}, ref) => {
+  const { controlId, describedBy, errorId } = useFieldControl({
+    ariaDescribedBy,
+    error,
+    id,
+  });
 
-  const classes = [
+  const classes = classNames(
     styles.input,
     error && styles.hasError,
     label && styles.hasLabel,
@@ -54,9 +52,7 @@ const Input: FC<InputProps> = ({
     disabled && styles.disabled,
     readOnly && styles.readOnly,
     className,
-  ]
-    .filter(Boolean)
-    .join(" ");
+  );
 
   return (
     <label className={classes}>
@@ -69,10 +65,11 @@ const Input: FC<InputProps> = ({
 
         <input
           {...props}
+          ref={ref}
           aria-describedby={describedBy}
           aria-invalid={error ? "true" : undefined}
           disabled={disabled}
-          id={inputId}
+          id={controlId}
           readOnly={readOnly}
         />
 
@@ -88,7 +85,9 @@ const Input: FC<InputProps> = ({
       )}
     </label>
   );
-};
+});
+
+Input.displayName = "Input";
 
 export type { InputProps };
 export default Input;

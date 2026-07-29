@@ -1,0 +1,90 @@
+@use "../../styles/_variables" as *;
+
+.tabs {
+  width: 100%;
+  color: $secondary-color;
+  font-family: $font-family;
+}
+
+.titles {
+  position: relative;
+  display: flex;
+  gap: 4px;
+  border-bottom: 1px solid $secondary-border;
+}
+
+.title {
+  position: relative;
+  padding: 10px 14px;
+  border: 0;
+  background: transparent;
+  color: $disabled-color;
+  cursor: pointer;
+  font: inherit;
+  font-size: $font-size-small;
+  font-weight: 600;
+  transition: $transition;
+
+  &::after {
+    position: absolute;
+    right: 0;
+    bottom: -1px;
+    left: 0;
+    height: 2px;
+    background-color: transparent;
+    content: "";
+    transition: $transition;
+  }
+
+  &:hover:not(:disabled) {
+    background-color: $secondary-hover;
+    color: $secondary-color;
+  }
+
+  &:focus-visible {
+    border-radius: $border-radius-small;
+    outline: $focus-outline;
+    outline-offset: -3px;
+  }
+
+  &:disabled {
+    color: $disabled-color;
+    cursor: not-allowed;
+    opacity: 0.55;
+  }
+}
+
+.indicator {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  height: 2px;
+  background: $primary-color;
+  transition:
+    transform 200ms ease,
+    width 200ms ease;
+}
+
+.active {
+  color: $primary-color;
+  background-color: $secondary-hover;
+}
+
+
+.tabsBody {
+  padding: 20px 0;
+  line-height: 1.5;
+
+  &:focus-visible {
+    border-radius: $border-radius-small;
+    outline: $focus-outline;
+    outline-offset: 3px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .title,
+  .title::after {
+    transition: none;
+  }
+}

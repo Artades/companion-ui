@@ -1,30 +1,36 @@
-import { FC, HTMLAttributes, ReactNode } from "react";
+import { forwardRef } from "react";
+import type { HTMLAttributes, ReactNode } from "react";
+import classNames from "../../helpers/classNames";
 import styles from "./Tooltip.module.scss";
 
 type TooltipContentPosition = "left" | "right" | "bottom" | "top";
 
-interface TooltipProps extends HTMLAttributes<HTMLElement> {
-  contentPosition: TooltipContentPosition;
+interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
+  contentPosition?: TooltipContentPosition;
   text: string;
 }
 
-const Tooltip: FC<TooltipProps> = ({
+const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(({
   contentPosition = "top",
   children,
-  className,
+  className = "",
   text,
-}) => {
-  const classes = [styles.tooltip, className].filter(Boolean).join(" ");
+  ...props
+}, ref) => {
+  const classes = classNames(styles.tooltip, className);
 
   return (
-    <div className={classes}>
+    <div {...props} ref={ref} className={classes}>
       <div content-position={contentPosition} className={styles.tooltipContent}>
         {children}
       </div>
       <span className={styles.tooltipText}>{text}</span>
     </div>
   );
-};
+});
 
+Tooltip.displayName = "Tooltip";
+
+export type { TooltipContentPosition, TooltipProps };
 export default Tooltip;

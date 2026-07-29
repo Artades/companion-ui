@@ -1,4 +1,4 @@
-import { ElementType, FC, HTMLAttributes, ReactNode } from "react";
+import type { ElementType, HTMLAttributes, ReactNode } from "react";
 type BadgeTone = "neutral" | "primary" | "success" | "warning" | "danger";
 type BadgeVariant = "filled" | "soft" | "outline";
 type BadgeSize = "small" | "medium";
@@ -10,6 +10,6 @@ interface BadgeProps extends HTMLAttributes<HTMLElement> {
     tone?: BadgeTone;
     variant?: BadgeVariant;
 }
-declare const Badge: FC<BadgeProps>;
+declare const Badge: import("react").ForwardRefExoticComponent<BadgeProps & import("react").RefAttributes<HTMLElement>>;
 export type { BadgeProps, BadgeSize, BadgeTone, BadgeVariant };
 export default Badge;
